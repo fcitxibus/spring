@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.lion</groupId>
+    <artifactId>spring</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0</version>
+    <modules>
+        <module>spring-base</module>
+    </modules>
+    <properties>
+        <!-- 进行相关插件的属性定义 -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.10</maven.compiler.source>
+        <maven.compiler.target>1.10</maven.compiler.target>
+        <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
+        <!-- 定义profile的相关处理 -->
+        <profiles.dir>src/main/profiles</profiles.dir>   <!-- 定义profiles父路径 -->
+        <resources.dir>src/main/resources</resources.dir>   <!-- 定义resources父路径 -->
+        <!-- 定义依赖库的版本编号 -->
+        <spring.version>5.1.7.RELEASE</spring.version>
+        <junit.version>4.12</junit.version>
+    </properties>
+    <dependencyManagement>
+        <dependencies>
+            <!--Spring测试包-->
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>${junit.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-test</artifactId>
+                <version>${spring.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <!--Spring基础包-->
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-context</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-core</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-beans</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-context-support</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+    <profiles>    <!-- 明确的进行具体的资源名称的配置，这个名称是在maven打包的时候使用的名称 -->
+        <profile>   <!-- 定义具体的profile引用名称 -->
+            <id>dev</id>    <!-- 定义profile名称为dev -->
+            <properties>    <!-- 定义当前的profile属性名称 -->
+                <profile.dir>${profiles.dir}/dev</profile.dir>
+            </properties>
+            <activation>    <!-- 如果在编译的时候没有设置任何的profile名字，则此配置生效 -->
+                <activeByDefault>true</activeByDefault> <!-- 默认打包环境 -->
+            </activation>
+        </profile>
+        <profile>   <!-- 定义具体的profile引用名称 -->
+            <id>test</id>   <!-- 定义profile名称为test -->
+            <properties>
+                <profile.dir>${profiles.dir}/test</profile.dir>
+            </properties>
+        </profile>
+        <profile>   <!-- 定义具体的profile引用名称 -->
+            <id>product</id>   <!-- 定义profile名称为product -->
+            <properties>
+                <profile.dir>${profiles.dir}/product</profile.dir>
+            </properties>
+        </profile>
+    </profiles>
+</project>
