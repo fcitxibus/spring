@@ -22,7 +22,7 @@
         <resources.dir>src/main/resources</resources.dir>   <!-- 定义resources父路径 -->
         <!-- 定义依赖库的版本编号 -->
         <spring.version>5.1.7.RELEASE</spring.version>
-        <junit.version>4.12</junit.version>
+        <junit.version>4.13.1</junit.version>
     </properties>
     <dependencyManagement>
         <dependencies>
